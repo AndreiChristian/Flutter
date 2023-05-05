@@ -17,6 +17,7 @@ class GradientContainer extends StatelessWidget {
   @override
   Widget build(context) {
     return Container(
+        alignment: Alignment.center,
         decoration: BoxDecoration(
             gradient: LinearGradient(
                 colors: [colorOne, colorTwo],

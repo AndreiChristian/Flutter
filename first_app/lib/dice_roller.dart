@@ -23,7 +23,7 @@ class _DiceRollerState extends State<DiceRoller> {
   @override
   Widget build(context) {
     return Column(
-      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Image.asset(
           activeDiceImage,
