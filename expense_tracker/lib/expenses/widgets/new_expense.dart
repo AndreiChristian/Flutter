@@ -10,16 +10,32 @@ class NewExpense extends StatefulWidget {
 }
 
 class _NewExpenseState extends State<NewExpense> {
+  final _titleControler = TextEditingController();
+
+  void _saveTitleInput(String inputValue) {}
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16),
-      child: Column(children: const [
+      child: Column(children: [
         TextField(
+          onChanged: _saveTitleInput,
           maxLength: 50,
-          decoration: InputDecoration(label: Text("Title")),
+          decoration: const InputDecoration(label: Text("Title")),
+        ),
+        Row(
+          children: [
+            ElevatedButton(onPressed: () {}, child: const Text("add"))
+          ],
         )
       ]),
     );
+  }
+
+  @override
+  void dispose() {
+    _titleControler.dispose();
+    super.dispose();
   }
 }
