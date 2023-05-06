@@ -1,7 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:expense_tracker/counter/custom_button.dart';
+import 'package:expense_tracker/counter/counter_output.dart';
 
-class CounterContainer extends StatelessWidget {
+class CounterContainer extends StatefulWidget {
   const CounterContainer({super.key});
+
+  @override
+  State<CounterContainer> createState() => _CounterContainerState();
+}
+
+class _CounterContainerState extends State<CounterContainer> {
+  int count = 0;
+
+  increment() {
+    setState(() {
+      count++;
+    });
+  }
+
+  decrement() {
+    setState(() {
+      count--;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,32 +34,17 @@ class CounterContainer extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
-                  onPressed: () {},
-                  style:
-                      ElevatedButton.styleFrom(backgroundColor: Colors.indigo),
-                  child: const Text(
-                    "-",
-                  ),
+                CounterButton(modifyCount: decrement, text: "-"),
+                CounterOutput(
+                  count: count.toString(),
                 ),
-                Container(
-                  margin: const EdgeInsets.all(20),
-                  child: const Text(
-                    "Count",
-                    style: TextStyle(color: Colors.blueGrey, fontSize: 40),
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  style:
-                      ElevatedButton.styleFrom(backgroundColor: Colors.indigo),
-                  child: const Text("+"),
-                )
+                CounterButton(modifyCount: increment, text: "+")
               ],
             ),
           ),
         ),
       ),
     );
+    ;
   }
 }
