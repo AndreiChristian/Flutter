@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:expense_tracker/counter/container.dart';
+import 'package:expense_tracker/expenses/widgets/expenses.dart';
 
 void main() {
-  runApp(CounterContainer());
+  runApp(MaterialApp(
+    theme: ThemeData(useMaterial3: true),
+    home: const Expenses(),
+  ));
 }
