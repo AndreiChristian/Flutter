@@ -29,26 +29,67 @@ class _ExpensesState extends State<Expenses> {
   void _addExpenseOverlay() {
     showModalBottomSheet(
         context: context,
+        isScrollControlled: true,
         builder: (ctx) {
-          return const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: NewExpense(),
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: NewExpense(
+              onAddExpense: _addExpense,
+            ),
           );
         });
   }
 
+  void _addExpense(Expense expense) {
+    setState(() {
+      _registeredExpenses.add(expense);
+    });
+  }
+
+  void _removeExpense(Expense expense) {
+    final expenseIndex = _registeredExpenses.indexOf(expense);
+    setState(() {
+      _registeredExpenses.remove(expense);
+    });
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: const Duration(milliseconds: 3000),
+        content: const Text("Expense deleted successfully!"),
+        action: SnackBarAction(
+            label: "Undo",
+            onPressed: () {
+              setState(() {
+                _registeredExpenses.insert(expenseIndex, expense);
+              });
+            }),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    Widget mainContent = const Center(
+      child: Text("No expenses found. Start adding some!"),
+    );
+
+    if (_registeredExpenses.isNotEmpty) {
+      mainContent = ExpensesList(
+        expenses: _registeredExpenses,
+        onRemoveExpense: _removeExpense,
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Flutter"),
+        title: const FlutterLogo(),
         actions: [
           IconButton(onPressed: _addExpenseOverlay, icon: const Icon(Icons.add))
         ],
       ),
       body: Column(
         children: [
-          Expanded(child: ExpensesList(expenses: _registeredExpenses)),
+          Expanded(child: mainContent),
           const Text('data'),
         ],
       ),

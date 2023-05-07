@@ -3,7 +3,9 @@ import 'package:expense_tracker/expenses/models/expense.dart'
     as expense_category;
 
 class NewExpense extends StatefulWidget {
-  const NewExpense({Key? key}) : super(key: key);
+  NewExpense({Key? key, required this.onAddExpense}) : super(key: key);
+
+  final void Function(expense_category.Expense expense) onAddExpense;
 
   @override
   State<StatefulWidget> createState() {
@@ -31,6 +33,38 @@ class _NewExpenseState extends State<NewExpense> {
     setState(() {
       selectedDate = pickedDate;
     });
+  }
+
+  _submitExpenseData() {
+    final double? enteredAmount = double.tryParse(_amountControler.text);
+
+    if (_titleControler.text.trim().isEmpty ||
+        (enteredAmount == null || enteredAmount <= 0) ||
+        (selectedDate == null) ||
+        _selectedCategory == null) {
+      showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+                title: const Text("Invalid Input"),
+                content: const Text(
+                    "Please make sure a valid title, amount and dialog are correct!"),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text("OK"))
+                ],
+              ));
+      return;
+    } else {
+      widget.onAddExpense(expense_category.Expense(
+          amount: enteredAmount,
+          date: selectedDate!,
+          title: _titleControler.text,
+          category: _selectedCategory!));
+      Navigator.pop(context);
+    }
   }
 
   @override
@@ -99,7 +133,8 @@ class _NewExpenseState extends State<NewExpense> {
                 },
                 child: const Text("Cancel")),
             const Spacer(),
-            ElevatedButton(onPressed: () {}, child: const Text("Add"))
+            ElevatedButton(
+                onPressed: _submitExpenseData, child: const Text("Add"))
           ],
         )
       ]),
