@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/categories.dart';
+import 'package:todo_app/screens/categories.dart';
 
 final theme = ThemeData(
   useMaterial3: true,
