@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/models/meal.dart';
+import 'package:todo_app/screens/meal_detail.dart';
+import 'package:todo_app/widgets/meal_item_trail.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class MealItem extends StatelessWidget {
   const MealItem({super.key, required this.meal});
 
   final Meal meal;
+
+  void _selectMeal(BuildContext context, Meal meal) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (ctx) => MealDetailScreen(
+          meal: meal,
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +27,9 @@ class MealItem extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       elevation: 20,
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          _selectMeal(context, meal);
+        },
         child: Stack(
           children: [
             FadeInImage(
@@ -50,7 +64,20 @@ class MealItem extends StatelessWidget {
                       height: 12,
                     ),
                     Row(
-                      children: [],
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        MealItemTrait(
+                            icon: Icons.schedule,
+                            label: meal.duration.toString()),
+                        const Spacer(),
+                        MealItemTrait(
+                            icon: Icons.work,
+                            label: meal.complexity.name.toString()),
+                        const Spacer(),
+                        MealItemTrait(
+                            icon: Icons.attach_money_sharp,
+                            label: meal.affordability.name)
+                      ],
                     )
                   ],
                 ),
