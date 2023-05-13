@@ -47,6 +47,13 @@ class _TabsStateScreen extends State<TabsScreen> {
     });
   }
 
+  void _setScreen(String indentifer) {
+    if (indentifer == "filters") {
+    } else {
+      Navigator.of(context).pop();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget _activeScreen = CategoriesScreen(
@@ -66,7 +73,7 @@ class _TabsStateScreen extends State<TabsScreen> {
       appBar: AppBar(
         title: Text(activePageTitle),
       ),
-      drawer: const MainDrawer(),
+      drawer: MainDrawer(onSelectScreen: _setScreen),
       body: _activeScreen,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
