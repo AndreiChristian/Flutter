@@ -20,7 +20,7 @@ class CategoriesScreen extends StatelessWidget {
         builder: (ctx) => MealsScreen(
           meals: filteredMeals,
           title: category.title,
-          onToggleFavourite: (meal) {},
+          onToggleFavourite: onToggleFavourite,
         ),
       ),
     );
