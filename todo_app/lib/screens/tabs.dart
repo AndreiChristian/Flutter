@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/models/meal.dart';
 import 'package:todo_app/screens/categories.dart';
+import 'package:todo_app/screens/filters.dart';
 import 'package:todo_app/screens/meals.dart';
 import 'package:todo_app/widgets/main_drawer.dart';
 
@@ -47,10 +48,16 @@ class _TabsStateScreen extends State<TabsScreen> {
     });
   }
 
-  void _setScreen(String indentifer) {
+  void _setScreen(String indentifer) async {
+    Navigator.of(context).pop();
     if (indentifer == "filters") {
-    } else {
-      Navigator.of(context).pop();
+      final filter = await Navigator.of(context).push<Map<Filter, bool>>(
+        MaterialPageRoute(
+          builder: (ctx) => const FiltersScreen(),
+        ),
+      );
+
+      print(filter);
     }
   }
 

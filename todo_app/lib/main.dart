@@ -5,7 +5,9 @@ import 'package:todo_app/screens/tabs.dart';
 final theme = ThemeData(
   useMaterial3: true,
   colorScheme: ColorScheme.fromSeed(
-      brightness: Brightness.dark, seedColor: Colors.teal.shade700),
+    brightness: Brightness.dark,
+    seedColor: Colors.teal.shade500,
+  ),
 );
 
 void main() {
