@@ -14,6 +14,19 @@ class _FiltersScreenState extends State<FiltersScreen> {
       appBar: AppBar(
         title: const Text("Filters"),
       ),
+      body: Column(children: [
+        SwitchListTile(
+          value: true,
+          onChanged: (bool changed) {},
+          title: Text(
+            "Gluten Free",
+            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                  color: Theme.of(context).colorScheme.onBackground,
+                ),
+          ),
+          subtitle: const Text("Include only gluten free meals"),
+        )
+      ]),
     );
   }
 }
