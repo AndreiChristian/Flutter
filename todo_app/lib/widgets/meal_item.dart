@@ -3,14 +3,15 @@ import 'package:todo_app/models/meal.dart';
 import 'package:todo_app/screens/meal_detail.dart';
 import 'package:todo_app/widgets/meal_item_trail.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MealItem extends StatelessWidget {
-  const MealItem(
-      {super.key, required this.meal, required this.onToggleFavourite});
+class MealItem extends ConsumerWidget {
+  const MealItem({
+    super.key,
+    required this.meal,
+  });
 
   final Meal meal;
-
-  final void Function(Meal meal) onToggleFavourite;
 
   void _selectMeal(BuildContext context, Meal meal) {
     Navigator.of(context).push(
@@ -18,7 +19,7 @@ class MealItem extends StatelessWidget {
         builder: (ctx) => MealDetailScreen(
           meal: meal,
           onToggleFavourite: (meal) {
-            onToggleFavourite(meal);
+            ref.
           },
         ),
       ),

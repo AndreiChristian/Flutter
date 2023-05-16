@@ -4,15 +4,14 @@ import 'package:todo_app/screens/meal_detail.dart';
 import 'package:todo_app/widgets/meal_item.dart';
 
 class MealsScreen extends StatelessWidget {
-  const MealsScreen(
-      {super.key,
-      required this.meals,
-      required this.title,
-      required this.onToggleFavourite});
+  const MealsScreen({
+    super.key,
+    required this.meals,
+    required this.title,
+  });
 
   final String title;
   final List<Meal> meals;
-  final void Function(Meal meal) onToggleFavourite;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +20,6 @@ class MealsScreen extends StatelessWidget {
         itemBuilder: (ctx, index) {
           return MealItem(
             meal: meals[index],
-            onToggleFavourite: onToggleFavourite,
           );
         });
 
