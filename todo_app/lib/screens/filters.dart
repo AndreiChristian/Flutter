@@ -76,7 +76,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                 });
               },
               title: Text(
-                "Vegan Free",
+                "Vegan",
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
                       color: Theme.of(context).colorScheme.onBackground,
                     ),
@@ -94,7 +94,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                 });
               },
               title: Text(
-                "Vegetarian Free",
+                "Vegetarian",
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
                       color: Theme.of(context).colorScheme.onBackground,
                     ),
